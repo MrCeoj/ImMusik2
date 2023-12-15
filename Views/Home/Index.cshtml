@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "ImMusik";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/Content/global.css" />
+}
+
+<main>
+    <div class="home_banner">
+        <section id="user">
+            <img src="~/Content/Logo/user.png">
+            <h1>Administrador</h1>
+        </section>
+        <a href="@Url.Action("Login", "Home")">
+            <img src="~/Content/Logo/logout.png" style="float: right">
+        </a>
+    </div>
+    <div class="title">
+        <h1>ImMusik</h1>
+    </div>
+    <div class="cards">
+        <a href="../Alumnos/Index">
+            <section class="card card1">
+                <h1>Alumnos</h1>
+            </section>
+        </a>
+        <a href="../Profesores/Index">
+            <section class="card card2">
+                <h1>Maestros </h1>
+            </section>
+        </a>
+        <a href="../Clases/Index">
+            <section class="card card3">
+                <h1 id="txt">Cursos</h1>
+            </section>
+        </a>
+    </div>
+
+</main>

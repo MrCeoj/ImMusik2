@@ -1,0 +1,47 @@
+﻿@model ImMusik2.Alumnos
+
+@{
+    ViewBag.Title = "Asignar alumno a curso";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Alumno/alumnoCreate.css"/>
+}
+
+<h2>Asignar a Curso</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="centered">
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-vertical">
+            <div class="form-group">
+                <span>Nombre</span>
+                <div class="input-dd">
+                    &emsp;@Html.DisplayFor(model => model.Nombre) @Html.DisplayFor(model => model.ApellidoPaterno) @Html.DisplayFor(model => model.ApellidoMaterno)
+                </div>
+            </div>
+            <div class="form-group">
+                <span>Curso</span>
+                <div class="input-container">
+                    @Html.DropDownList("CursoId", (IEnumerable<SelectListItem>)ViewBag.Cursos, "Selecciona un curso", new { @class = "form-control", @required = "required"})
+                </div>
+            </div>
+            <input type="submit" value="Agregar" class="btn-submit" />
+        </div>
+    </div>
+</div>
+}
+
+<div id="foot">
+    @Html.ActionLink("Regresar a la lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    

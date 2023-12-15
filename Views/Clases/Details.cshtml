@@ -1,0 +1,115 @@
+﻿@model ImMusik2.Clases
+
+@{
+    ViewBag.Title = "Detalles de clase";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/Content/Clases/clasesDetails.css" />
+}
+
+<h2>Detalles del curso</h2>
+
+<div class="holder">
+    <div class="centered">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <dt>
+                    ID:
+                </dt>
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Id)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    Curso:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Nombre)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    MaxAlum:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.NumAlumnos)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    Hora:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Hora)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    Días:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Dias)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    Docente:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Profesores.Nombre)
+                </dd>
+            </div>
+            <div class="row">
+                <dt>
+                    Sucursal:
+                </dt>
+
+                <dd>
+                    &emsp;@Html.DisplayFor(model => model.Sucursales.Nombre)
+                </dd>
+            </div>
+
+        </dl>
+        <p>
+            @Html.ActionLink("Regresar a la lista", "Index")
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Id })
+        </p>
+    </div>
+    <div class="list">
+        <h3>Lista de alumnos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido P.</th>
+                    <th>Apellido M.</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var registro in Model.RegistrosClases) {
+                    <tr>
+                        <td>@registro.Alumnos.Nombre</td>
+                        <td>@registro.Alumnos.ApellidoPaterno</td>
+                        <td>@registro.Alumnos.ApellidoMaterno</td>
+                        <td>@registro.Alumnos.Edad</td>
+                        <td>
+                            @using (Html.BeginForm("DeleteConfirmed", "RegistrosClases", new { id = Model.Id, idalumno = registro.IdAlumno }, FormMethod.Post)) {
+                                @Html.Hidden("sourceController", "Clases")
+                                <input type="submit" value="Dar de baja" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

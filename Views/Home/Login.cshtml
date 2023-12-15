@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Login | ImMusik";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/login.css"/>
+}
+
+<div class="overlay"></div>
+<div class="ignore">
+    <div class="contenedor">
+        <div class="logo">
+            <img src="/Content/Logo/logote.png" alt="">
+        </div>
+        <form id="login">
+            <h2>Iniciar sesión</h2>
+            <input type="text" id="username" placeholder="Usuario" required>
+            <br>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <br>
+            <button type="button" onclick="login()">Acceder</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var validUsername = "villafontana";
+            var validPassword = "fong123";
+
+            if (username === validUsername && password === validPassword) {
+                window.location.href = "/Home/Index"
+            } else {
+                alert("Usuario o contraseña incorrectos");
+            }
+        }
+    </script>
+}

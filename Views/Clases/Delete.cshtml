@@ -1,0 +1,82 @@
+﻿@model ImMusik2.Clases
+
+@{
+    ViewBag.Title = "Eliminar clase";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/Content/Profesor/profesorDetails.css" />
+}
+
+<h2>&emsp;</h2>
+
+<div class="centered">
+    <h3>¿Desea borrar este curso?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt>
+                Curso
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                AlumnosMax:
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.NumAlumnos)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Hora:
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Hora)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Días:
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Dias)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Docente:
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Profesores.Nombre)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Sucursal:
+            </dt>
+
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Sucursales.Nombre)
+            </dd>
+        </div>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn-submit" />
+        </p>
+    }
+</div>

@@ -1,0 +1,115 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url('/Content/Logo/fondo.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100vh;
+    
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.logo{
+    position: relative;
+    text-align: center;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+    width: 70%;
+    border: none;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+#login{
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    z-index: 1;
+    text-align: center;
+    padding: 30px 30px;
+}
+
+h2{
+    color: #FB038F;
+    font-family: Inter;
+    text-align: center;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+}
+
+input{
+    color: rgba(0, 0, 0, 0.60);
+    text-align: left;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; 
+
+    margin: 10px;
+    padding: 8px; /* ajusta el padding según sea necesario */
+    border: none;
+    border-radius: 5px;
+    width: calc(100% - 18px); /* ajusta el ancho restando el doble del padding */
+    box-sizing: border-box; 
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(0, 0, 0, 0.20); /* Ajusta el color según sea necesario */
+}
+
+button{
+    border-radius: 10px;
+    background: #FB038F;
+    cursor: pointer;
+    color: #FFF;
+    border: none;
+    text-align: center;
+    font-family: Inter;
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    width: calc(100% - 18px); /* ajusta el ancho restando el doble del padding */
+    box-sizing: border-box; 
+    
+}
+
+.ignore{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Agregado para centrar verticalmente */
+    height: 100vh; 
+}
+
+@media (max-width: 888px) {
+    h2{
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 22px;
+    }
+}

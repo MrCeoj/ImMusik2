@@ -1,0 +1,64 @@
+﻿@model ImMusik2.Profesores
+
+@{
+    ViewBag.Title = "Editar información de profesor";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Profesor/profesorCreate.css">
+}
+
+<h2>Editar registro</h2>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="centered">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-vertical">
+                <div class="form-group">
+                    <span>Nombre</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Apellido P.</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ApellidoPaterno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Apellido M.</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ApellidoMaterno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Contacto</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Contacto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Contacto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <input type="submit" value="Guardar" class="btn-submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="foot">
+    @Html.ActionLink("Regresar a lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

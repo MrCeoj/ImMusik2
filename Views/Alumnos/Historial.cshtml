@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ImMusik2.Pagos>
+
+@{
+    ViewBag.Title = "Historial de pagos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Alumno/alumnoIndex.css"/>
+}
+
+<h2>Historial de pagos</h2>
+
+<div class="centered">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Cantidad)</th>
+                <th>@Html.DisplayNameFor(model => model.Metodo)</th>
+                <th>@Html.DisplayNameFor(model => model.Concepto)</th>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Metodo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Concepto)</td>
+                    <td>@item.Fecha.ToString("d")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p class="paragraph">
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

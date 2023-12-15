@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="immusikModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Alumnos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="20" />
+    <Property Name="Contacto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tutor" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Edad" Type="int" Nullable="false" />
+    <Property Name="Activo" Type="varchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Clases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdSucursal" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="NumAlumnos" Type="int" Nullable="false" />
+    <Property Name="IdProfesor" Type="int" Nullable="false" />
+    <Property Name="Hora" Type="int" Nullable="false" />
+    <Property Name="Dias" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pagos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="money" Nullable="false" />
+    <Property Name="Metodo" Type="varchar" MaxLength="20" />
+    <Property Name="IdAlumno" Type="int" Nullable="false" />
+    <Property Name="Concepto" Type="varchar" MaxLength="100" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="20" />
+    <Property Name="Contacto" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegistrosClases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdClase" Type="int" Nullable="false" />
+    <Property Name="IdAlumno" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sucursales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Ubicacion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Clases__IdProfes__1209AD79">
+    <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesores">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="IdProfesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__IdSucurs__12FDD1B2">
+    <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursales">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pagos__IdAlumno__0B5CAFEA">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+    <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pagos">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Registros__IdAlu__16CE6296">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+    <End Role="RegistrosClases" Type="Self.RegistrosClases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegistrosClases">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Registros__IdCla__15DA3E5D">
+    <End Role="Clases" Type="Self.Clases" Multiplicity="1" />
+    <End Role="RegistrosClases" Type="Self.RegistrosClases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clases">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegistrosClases">
+        <PropertyRef Name="IdClase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="immusikModelStoreContainer">
+    <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clases" EntityType="Self.Clases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profesores" EntityType="Self.Profesores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegistrosClases" EntityType="Self.RegistrosClases" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sucursales" EntityType="Self.Sucursales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Clases__IdProfes__1209AD79" Association="Self.FK__Clases__IdProfes__1209AD79">
+      <End Role="Profesores" EntitySet="Profesores" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__IdSucurs__12FDD1B2" Association="Self.FK__Clases__IdSucurs__12FDD1B2">
+      <End Role="Sucursales" EntitySet="Sucursales" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pagos__IdAlumno__0B5CAFEA" Association="Self.FK__Pagos__IdAlumno__0B5CAFEA">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="Pagos" EntitySet="Pagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Registros__IdAlu__16CE6296" Association="Self.FK__Registros__IdAlu__16CE6296">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="RegistrosClases" EntitySet="RegistrosClases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Registros__IdCla__15DA3E5D" Association="Self.FK__Registros__IdCla__15DA3E5D">
+      <End Role="Clases" EntitySet="Clases" />
+      <End Role="RegistrosClases" EntitySet="RegistrosClases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

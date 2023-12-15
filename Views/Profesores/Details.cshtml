@@ -1,0 +1,69 @@
+﻿@model ImMusik2.Profesores
+
+@{
+    ViewBag.Title = "Detalles de profesor";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Profesor/profesorDetails.css">
+}
+
+<h2>Detalles del docente</h2>
+
+<div class="centered">
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <dt>
+                ID:
+            </dt>
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Id)
+            </dd>
+        </div>
+        <div class="row">
+            <dt>
+                Nombre:
+            </dt>
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </div>
+
+        <div class="row">
+            <dt>
+                Apellido P:
+            </dt>
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.ApellidoPaterno)
+            </dd>
+        </div>
+
+        <div class="row">
+            <dt>
+                Apellido M:
+            </dt>
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.ApellidoMaterno)
+            </dd>
+        </div>
+
+        <div class="row">
+            <dt>
+                Contacto:
+            </dt>
+            <dd>
+                &emsp;@Html.DisplayFor(model => model.Contacto)
+            </dd>
+        </div>
+    </dl>
+
+    <p>
+        @Html.ActionLink("Regresar a lista", "Index")
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id })
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

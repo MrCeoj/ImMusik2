@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Font/inter.css" />
+    <link rel="stylesheet" href="~/Content/Site.css"/>
+    <link rel="icon" href="~/Content/Logo/Icon.png"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @{
+        var controller = ViewContext.RouteData.Values["controller"].ToString();
+        var action = ViewContext.RouteData.Values["action"].ToString();
+    }
+    @if (!(controller == "Home" && (action == "Index" || action == "Login"))) {
+        <nav id="navsito">
+            <ul class="nav-list">
+                <li>@Html.ActionLink("Maestros", "Index", "Profesores", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Alumnos", "Index", "Alumnos", new { area = "" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Clases", "Index", "Clases", new { area = "" }, new { @class = "nav-link" })</li>
+            </ul>
+            <a href="@Url.Action("Index", "Home", new { area = "" })">
+                <img src="~/Content/Logo/Logote.png" alt="IMMUSIK" class="navbar-brand" />
+            </a>
+        </nav>
+    }
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
+</body>
+</html>

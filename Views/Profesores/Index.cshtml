@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ImMusik2.Profesores>
+
+@{
+    ViewBag.Title = "Profesores";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Profesor/profesorIndex.css">
+}
+
+<h2>Profesores</h2>
+
+<div class="ignore">
+    <div class="search">
+        <div class="refresh" onclick="refreshPage()" />
+        <img src="~/Content/Logo/refresh.png" />
+    </div>
+    <input type="text" id="searchInput" placeholder="Nombre" />
+    <button onclick="searchTable()">Buscar</button>
+</div>
+</div>
+<div class="centered">
+    <p class="paragraph">
+        @Html.ActionLink("Agregar nuevo", "Create")
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido P.
+            </th>
+            <th>
+                Apellido M.
+            </th>
+            <th>
+                Contacto
+            </th>
+        </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contacto)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function refreshPage() {
+            location.reload();
+        }
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementsByClassName("table")[0];
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Cambia el índice según la columna quedesees buscar
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

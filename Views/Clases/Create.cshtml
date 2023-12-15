@@ -1,0 +1,109 @@
+﻿@model ImMusik2.Clases
+
+@{
+    ViewBag.Title = "Agregar clase";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/Content/Clases/clasesCreate.css" />
+}
+
+<h2>Registrar nueva clase</h2>
+
+
+@using (Html.BeginForm("Create", "Clases", FormMethod.Post, new { id = "create-form" })) {
+    @Html.AntiForgeryToken()
+    <div class="centered">
+        <div class="form-horizontal">
+            <h4>Ingresar información</h4>
+            <div class="form-vertical">
+                <div class="form-group">
+                    <span>Id:</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Sucursal:</span>
+                    <div class="input-container">
+                        @Html.DropDownList("IdSucursal", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Nombre:</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>MaxAlumnos:</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.NumAlumnos, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NumAlumnos, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Docente:</span>
+                    <div class="input-container">
+                        @Html.DropDownList("IdProfesor", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdProfesor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Hora:</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Hora, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Hora, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span>Días:</span>
+                    <div class="input-container">
+                        @Html.EditorFor(model => model.Dias, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <input type="submit" value="Agregar" class="btn-submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="foot">
+    @Html.ActionLink("Regresar a la lista", "Index")
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("create-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.success) {
+                        window.location.href = '@Url.Action("Index", "Clases")';
+                    } else {
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="immusikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Alumnos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tutor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Edad" Type="Int32" Nullable="false" />
+    <Property Name="Activo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pagos" Relationship="Self.FK__Pagos__IdAlumno__6442E2C9" FromRole="Alumnos" ToRole="Pagos" />
+    <NavigationProperty Name="RegistrosClases" Relationship="Self.FK__Registros__IdAlu__6FB49575" FromRole="Alumnos" ToRole="RegistrosClases" />
+  </EntityType>
+  <EntityType Name="Clases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NumAlumnos" Type="Int32" Nullable="false" />
+    <Property Name="IdProfesor" Type="Int32" Nullable="false" />
+    <Property Name="Hora" Type="Int32" Nullable="false" />
+    <Property Name="Dias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK__Clases__IdProfes__6AEFE058" FromRole="Clases" ToRole="Profesores" />
+    <NavigationProperty Name="Sucursales" Relationship="Self.FK__Clases__IdSucurs__6BE40491" FromRole="Clases" ToRole="Sucursales" />
+    <NavigationProperty Name="RegistrosClases" Relationship="Self.FK__Registros__IdCla__6EC0713C" FromRole="Clases" ToRole="RegistrosClases" />
+  </EntityType>
+  <EntityType Name="Pagos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Metodo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IdAlumno" Type="Int32" Nullable="false" />
+    <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Alumnos" Relationship="Self.FK__Pagos__IdAlumno__6442E2C9" FromRole="Pagos" ToRole="Alumnos" />
+  </EntityType>
+  <EntityType Name="Profesores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clases" Relationship="Self.FK__Clases__IdProfes__6AEFE058" FromRole="Profesores" ToRole="Clases" />
+  </EntityType>
+  <EntityType Name="RegistrosClases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdClase" Type="Int32" Nullable="false" />
+    <Property Name="IdAlumno" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Alumnos" Relationship="Self.FK__Registros__IdAlu__6FB49575" FromRole="RegistrosClases" ToRole="Alumnos" />
+    <NavigationProperty Name="Clases" Relationship="Self.FK__Registros__IdCla__6EC0713C" FromRole="RegistrosClases" ToRole="Clases" />
+  </EntityType>
+  <EntityType Name="Sucursales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clases" Relationship="Self.FK__Clases__IdSucurs__6BE40491" FromRole="Sucursales" ToRole="Clases" />
+  </EntityType>
+  <Association Name="FK__Pagos__IdAlumno__6442E2C9">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+    <End Role="Pagos" Type="Self.Pagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pagos">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Registros__IdAlu__6FB49575">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="1" />
+    <End Role="RegistrosClases" Type="Self.RegistrosClases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegistrosClases">
+        <PropertyRef Name="IdAlumno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__IdProfes__6AEFE058">
+    <End Role="Profesores" Type="Self.Profesores" Multiplicity="1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesores">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="IdProfesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clases__IdSucurs__6BE40491">
+    <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+    <End Role="Clases" Type="Self.Clases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursales">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clases">
+        <PropertyRef Name="IdSucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Registros__IdCla__6EC0713C">
+    <End Role="Clases" Type="Self.Clases" Multiplicity="1" />
+    <End Role="RegistrosClases" Type="Self.RegistrosClases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clases">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RegistrosClases">
+        <PropertyRef Name="IdClase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="immusikEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Alumnos" EntityType="Self.Alumnos" />
+    <EntitySet Name="Clases" EntityType="Self.Clases" />
+    <EntitySet Name="Pagos" EntityType="Self.Pagos" />
+    <EntitySet Name="Profesores" EntityType="Self.Profesores" />
+    <EntitySet Name="RegistrosClases" EntityType="Self.RegistrosClases" />
+    <EntitySet Name="Sucursales" EntityType="Self.Sucursales" />
+    <AssociationSet Name="FK__Pagos__IdAlumno__6442E2C9" Association="Self.FK__Pagos__IdAlumno__6442E2C9">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="Pagos" EntitySet="Pagos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Registros__IdAlu__6FB49575" Association="Self.FK__Registros__IdAlu__6FB49575">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="RegistrosClases" EntitySet="RegistrosClases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__IdProfes__6AEFE058" Association="Self.FK__Clases__IdProfes__6AEFE058">
+      <End Role="Profesores" EntitySet="Profesores" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clases__IdSucurs__6BE40491" Association="Self.FK__Clases__IdSucurs__6BE40491">
+      <End Role="Sucursales" EntitySet="Sucursales" />
+      <End Role="Clases" EntitySet="Clases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Registros__IdCla__6EC0713C" Association="Self.FK__Registros__IdCla__6EC0713C">
+      <End Role="Clases" EntitySet="Clases" />
+      <End Role="RegistrosClases" EntitySet="RegistrosClases" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="immusikModel.sysdiagrams" />
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

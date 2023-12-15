@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="immusikModelStoreContainer" CdmEntityContainer="immusikEntities">
+    <EntitySetMapping Name="Alumnos">
+      <EntityTypeMapping TypeName="immusikModel.Alumnos">
+        <MappingFragment StoreEntitySet="Alumnos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="Tutor" ColumnName="Tutor" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clases">
+      <EntityTypeMapping TypeName="immusikModel.Clases">
+        <MappingFragment StoreEntitySet="Clases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="NumAlumnos" ColumnName="NumAlumnos" />
+          <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pagos">
+      <EntityTypeMapping TypeName="immusikModel.Pagos">
+        <MappingFragment StoreEntitySet="Pagos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+          <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesores">
+      <EntityTypeMapping TypeName="immusikModel.Profesores">
+        <MappingFragment StoreEntitySet="Profesores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistrosClases">
+      <EntityTypeMapping TypeName="immusikModel.RegistrosClases">
+        <MappingFragment StoreEntitySet="RegistrosClases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+          <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sucursales">
+      <EntityTypeMapping TypeName="immusikModel.Sucursales">
+        <MappingFragment StoreEntitySet="Sucursales">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="immusikModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
